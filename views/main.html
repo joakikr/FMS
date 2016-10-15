@@ -1,0 +1,74 @@
+<!-- Main View -->
+<h1>Funky Minesweeper</h1>
+
+<div id="board">
+    <table id="minefield">
+        <tr ng-repeat="row in getMinefield().rows">
+            <td 
+            
+            ng-right-click="rightClick(spot)"
+            ng-repeat="spot in row.spots"
+            ng-click="uncoverSpot(spot, $parent.$index, $index)">
+
+
+            <!-- Logic for revelead spot -->
+            <div ng-if="spot.isCovered && !spot.flash">
+                <img ng-if="!spot.isFlag && !spot.isFlagSuspect" ng-src="img/covered.png">
+                <img ng-if="spot.isFlag" ng-src="img/flag-mine.png">
+                <img ng-if="spot.isFlagSuspect" ng-src="img/flag-suspect.png">
+            </div>
+
+            <!-- Logic for covered spot -->
+            <div ng-if="!spot.isCovered || spot.flash">
+                <!-- Mine -->
+                <div ng-if="spot.content == getSpotTypes().MINE">
+                    <img ng-src="img/mine.png">
+                </div>
+
+                <!-- Number -->
+                <div ng-if="spot.content == getSpotTypes().NUMBER">
+                    <img ng-if="spot.adjacentMines == 0" ng-src="img/empty.png">
+                    <img ng-if="spot.adjacentMines == 1" ng-src="img/number-1.png">
+                    <img ng-if="spot.adjacentMines == 2" ng-src="img/number-2.png">
+                    <img ng-if="spot.adjacentMines == 3" ng-src="img/number-3.png">
+                    <img ng-if="spot.adjacentMines == 4" ng-src="img/number-4.png">
+                    <img ng-if="spot.adjacentMines == 5" ng-src="img/number-5.png">
+                    <img ng-if="spot.adjacentMines == 6" ng-src="img/number-6.png">
+                    <img ng-if="spot.adjacentMines == 7" ng-src="img/number-7.png">
+                    <img ng-if="spot.adjacentMines == 8" ng-src="img/number-8.png">
+                </div>
+
+                <!-- Mine Wrong -->
+                <div ng-if="spot.content == getSpotTypes().MINE_WRONG">
+                    <img ng-src="img/mine-wrong.png">
+                </div>
+
+                <!-- Flag Mine Wrong -->
+                <div ng-if="spot.content == getSpotTypes().FLAG_MINE_WRONG">
+                    <img ng-src="img/flag-mine-wrong.png">
+                </div>
+            </div>
+        </td>
+    </tr>
+    </table>
+</div>
+
+<div id="footer">
+    <!-- Flags Left -->
+    <h2>Flags Set: {{ getFlagsSet() }}</h2>
+
+    <!-- Mines Left -->
+    <h2>Mines Left: {{ getMinesLeft() }}</h2>
+
+    <!-- Funky Mine Timer -->
+    <h2>Funky Mine In: {{ countDown }}</h2>
+
+    <!-- Win/Loss Message -->
+    <h3 ng-if="status == STATE.WON">YOU WON</h3>
+    <h3 ng-if="status == STATE.LOST">YOU LOST</h3>
+
+    <!-- Restart -->
+    <span id="easy" ng-click="init(LEVEL.EASY)">EASY</span>
+    <span id="medium" ng-click="init(LEVEL.MEDIUM)">MEDIUM</span>
+    <span id="hard" ng-click="init(LEVEL.HARD)">HARD</span>
+</div>
