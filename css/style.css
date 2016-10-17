@@ -16,29 +16,28 @@
 }
 
 #easy {
-	color: #41ace9;
-	border-bottom: 3px solid #41ace9;
-	cursor: pointer;
+	color: #aed34b;
 }
 
 #medium {
-	color: #aed34b;
-	border-bottom: 3px solid #aed34b;
-	cursor: pointer;
+	color: #41ace9;
 }
 
 #hard {
 	color: #c54274;
-	border-bottom: 3px solid #c54274;
-	cursor: pointer;
 }
 
-.vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-) */
-  display: flex;
-  align-items: center;
+p#easy, p#medium, p#hard {
+	cursor: pointer;
+	text-decoration: underline;
 }
+
+@media(max-width:1200px){
+	#buttons {
+		margin-top: 20px;
+	}
+}
+
 
 /*****************/
 /*** OVERIDDEN ***/
@@ -49,24 +48,3 @@
 	min-height: 100%;
 	width: 100%;
 }
-
-#container{
-	margin: 0 auto;
-	width: 80%;
-	text-align:center;
-}
-
-h1{
-	font-size: 36pt;
-
-}
-
-#footer{
-	text-align: center;
-
-}
-
-#board{
-
-}
-
